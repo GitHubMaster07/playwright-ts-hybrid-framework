@@ -1,9 +1,10 @@
 export const testData = {
     urls: {
         google: 'https://www.google.com',
-        demoSite: 'https://example.com'
+        sauceDemo: 'https://www.saucedemo.com' // Ensure this line exists!
     },
-    searchQueries: {
-        standard: 'Playwright Automation',
+    credentials: {
+        standardUser: 'standard_user',
+        password: 'secret_sauce'
     }
 };
