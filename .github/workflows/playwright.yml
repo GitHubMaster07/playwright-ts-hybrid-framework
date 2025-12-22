@@ -21,11 +21,12 @@ jobs:
       run: npx playwright install --with-deps
     
     - name: Run Playwright tests
-      # This env block allows your code to read GitHub Secrets as process.env variables
+      # Mapping your GitHub Secrets to Environment Variables
       env:
         BASE_URL: ${{ secrets.BASE_URL }}
         API_URL: ${{ secrets.API_URL }}
-      run: npx playwright test
+      # Adding --update-snapshots creates the Linux versions of your images
+      run: npx playwright test --update-snapshots
     
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
