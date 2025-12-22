@@ -1,50 +1,35 @@
-# Playwright TypeScript Hybrid Framework 🚀
+# Playwright TypeScript Hybrid Framework 🎭
 
 ![Playwright Tests](https://github.com/GitHubMaster07/playwright-ts-hybrid-framework/actions/workflows/playwright.yml/badge.svg)
 
-## 📌 Overview
-A professional-grade **Hybrid Automation Framework** designed for high-velocity environments. This suite integrates **UI, API, and Visual Regression testing** into a single TypeScript ecosystem, optimized for modern CI/CD pipelines.
+## 📌 Project Overview
+This is a professional-grade **Hybrid Automation Framework** designed for high-velocity environments. It demonstrates a unified approach to testing by combining **UI Automation**, **REST API Validation**, and **Visual Regression** into a single, type-safe ecosystem.
 
-## 🏗️ Architectural Highlights
-- **Page Object Model (POM)**: Enhanced with TypeScript interfaces for strict element typing and maintainability.
-- **API Integrated Validation**: Direct backend state verification to support UI flows, significantly reducing test fragility.
-- **Type-Safe Environment Management**: Custom configuration layer using `dotenv` and TS assertions to securely handle multi-environment URLs and secrets.
-- **Cross-Platform Visual Regression**: Pixel-comparison snapshots with automated handling for OS-specific rendering differences.
+## 🏗️ Architectural Features
+- **Strictly Typed Data Layer**: Leverages TypeScript interfaces and `as const` assertions to manage environment-specific URLs and credentials safely.
+- **Page Object Model (POM)**: Implements a clean separation of concerns, ensuring tests are resilient to UI changes.
+- **Hybrid Testing Strategy**: Executes backend API checks alongside frontend UI flows to ensure full-stack data integrity.
+- **Visual Regression**: Built-in pixel-perfect comparison logic with automated handling for **Linux vs Windows** rendering differences in CI/CD.
+- **CI/CD Integration**: Fully automated via GitHub Actions with distinct workflows for `@smoke` tests and Full Regression.
 
-## 📊 Advanced Reporting (Allure)
-This framework uses **Allure Report** for stakeholder-friendly execution insights, featuring trend analysis and category-based defect tracking.
+## 🛠️ Technology Stack
+- **Language**: TypeScript (Strict Mode)
+- **Engine**: Playwright (Chromium, Firefox, WebKit)
+- **Reporting**: **Allure Report** & Playwright HTML Reporter
+- **CI/CD**: GitHub Actions
+- **Env Management**: Dotenv & GitHub Secrets
+
+## 📊 Reporting (Allure)
+The framework is integrated with **Allure Report** for stakeholder-friendly execution insights.
 
 ### View Reports Locally:
-1. **Generate results**: `npx playwright test` (results are stored in `allure-results`)
-2. **Open Allure**: 
-   ```bash
-   npx allure generate allure-results --clean -o allure-report
-   npx allure open allure-report
+1. **Run Tests**: `npx playwright test`
+2. **Generate Report**: `npx allure generate allure-results --clean -o allure-report`
+3. **Open Report**: `npx allure open allure-report`
 
-🛠️ Tech Stack
-Engine: Playwright (Chromium, Firefox, WebKit)
+## 🚀 Getting Started
 
-Language: TypeScript (Strict Mode)
-
-CI/CD: GitHub Actions
-
-Reporting: Allure Report & Playwright HTML Reporter
-
-🚀 Getting Started
-# Install dependencies
+### 1. Installation
+```bash
 npm install
-
-# Run Smoke Suite
-npx playwright test --grep "@smoke"
-
-# Run Full Hybrid Suite (UI + API)
-npx playwright test
-
-📈 CI/CD Pipeline
-The .github/workflows/playwright.yml handles:
-
-Parallel execution across all major browsers.
-
-Automatic secret management for environment variables.
-
-Preservation of test artifacts (Traces, Screenshots, and Allure data).
+npx playwright install --with-deps
