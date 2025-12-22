@@ -1,5 +1,5 @@
 # Universal Playwright TypeScript Hybrid Framework
-
+![Playwright Tests](https://github.com/GitHubMaster07/playwright-ts-hybrid-framework/actions/workflows/playwright.yml/badge.svg)
 A professional-grade automation framework designed for scalability and cross-industry application.
 
 ## 🚀 Key Features
