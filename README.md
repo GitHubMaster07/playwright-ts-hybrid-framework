@@ -24,7 +24,7 @@ This project demonstrates a professional **Hybrid Testing** approach. It doesn't
 ### 2. Local Setup
 ```bash
 # Clone the repository
-git clone [https://github.com/YOUR_USERNAME/playwright-ts-hybrid-framework.git](https://github.com/YOUR_USERNAME/playwright-ts-hybrid-framework.git)
+git clone [https://github.com/GitHubMaster07/playwright-ts-hybrid-framework.git](https://github.com/YOUR_USERNAME/playwright-ts-hybrid-framework.git)
 cd playwright-ts-hybrid-framework
 
 # Install dependencies
