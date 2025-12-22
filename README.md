@@ -2,33 +2,28 @@
 
 ![Playwright Tests](https://github.com/GitHubMaster07/playwright-ts-hybrid-framework/actions/workflows/playwright.yml/badge.svg)
 
-A high-performance automation framework designed for **UI and API testing**, featuring a strictly typed architecture and integrated CI/CD pipeline.
+## 📌 Overview
+This repository showcases a professional-grade **Hybrid Automation Framework** designed for high-velocity environments. It integrates **UI, API, and Visual Regression testing** into a single TypeScript-based ecosystem, optimized for modern CI/CD pipelines.
 
-## 🌟 Project Overview
-This project demonstrates a professional **Hybrid Testing** approach. It doesn't just check the UI; it validates the data layer via REST APIs in the same execution cycle, ensuring full-stack reliability.
+## 🏗️ Architectural Highlights
+- **Page Object Model (POM)**: Enhanced with TypeScript interfaces for strict element typing.
+- **API Integrated Validation**: Direct backend state verification to support UI flows, reducing test fragility.
+- **Type-Safe Environment Management**: Custom configuration layer using `dotenv` and TS assertions to handle multi-environment URLs and secrets.
+- **Cross-Platform Visual Regression**: Implements pixel-comparison snapshots with automated handling for OS-specific rendering (Linux/Windows).
 
-## 🛠️ Key Technical Features
-- **Strict TypeScript Implementation**: Leverages TS interfaces and `as const` assertions for a 100% type-safe data layer.
-- **Page Object Model (POM)**: Implements a clean separation of concerns, making tests resilient to UI changes.
-- **Cross-Browser Execution**: Validated on Chromium, Firefox, and WebKit.
-- **Environment Agnostic**: Uses `dotenv` for local development and GitHub Secrets for secure CI/CD execution.
-- **Visual Regression**: Built-in visual snapshot testing with support for cross-platform (Windows vs Linux) rendering.
-- **Selective Tagging**: Features a `@smoke` suite for rapid deployment checks.
+## 🛠️ Toolchain
+- **Language**: TypeScript
+- **Engine**: Playwright (Chromium, Firefox, WebKit)
+- **CI/CD**: GitHub Actions (Smoke & Full Regression workflows)
+- **Reporting**: Playwright HTML Reporter & Trace Viewer
 
-## 🚀 Getting Started
-
-### 1. Prerequisites
-- Node.js (v18 or higher)
-- GitHub account (for CI/CD features)
-
-### 2. Local Setup
+## 🚀 Execution
 ```bash
-# Clone the repository
-git clone [https://github.com/GitHubMaster07/playwright-ts-hybrid-framework.git](https://github.com/YOUR_USERNAME/playwright-ts-hybrid-framework.git)
-cd playwright-ts-hybrid-framework
-
 # Install dependencies
 npm install
 
-# Install Playwright browsers
-npx playwright install --with-deps
+# Run Smoke Suite (@smoke tag)
+npx playwright test --grep "@smoke"
+
+# Run Full Hybrid Suite
+npx playwright test
