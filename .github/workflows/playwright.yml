@@ -26,7 +26,7 @@ jobs:
         BASE_URL: ${{ secrets.BASE_URL }}
         API_URL: ${{ secrets.API_URL }}
       # Adding --update-snapshots generates the missing Linux images
-      run: npx playwright test --update-snapshots
+      run: npx playwright test 
     
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
