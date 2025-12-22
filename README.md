@@ -1,6 +1,6 @@
 # Playwright TypeScript Hybrid Framework 🚀
 
-![Playwright Tests](https://github.com/YOUR_USERNAME/playwright-ts-hybrid-framework/actions/workflows/playwright.yml/badge.svg)
+![Playwright Tests](https://github.com/GitHubMaster07/playwright-ts-hybrid-framework/actions/workflows/playwright.yml/badge.svg)
 
 A high-performance automation framework designed for **UI and API testing**, featuring a strictly typed architecture and integrated CI/CD pipeline.
 
