@@ -4,6 +4,9 @@ on:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
+  # Allows you to run this manually from the Actions tab
+  workflow_dispatch: 
+
 jobs:
   test:
     timeout-minutes: 60
@@ -20,13 +23,20 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     
-    - name: Run Playwright tests
-      # Env block maps your GitHub Secrets to the test environment
+    - name: Run Smoke Tests
+      if: github.event_name == 'push' || github.event_name == 'pull_request'
       env:
         BASE_URL: ${{ secrets.BASE_URL }}
         API_URL: ${{ secrets.API_URL }}
-      # Adding --update-snapshots generates the missing Linux images
-      run: npx playwright test 
+      # Use quotes around the grep pattern for reliability
+      run: npx playwright test --grep "@smoke"
+
+    - name: Run Full Suite
+      if: github.event_name == 'workflow_dispatch'
+      env:
+        BASE_URL: ${{ secrets.BASE_URL }}
+        API_URL: ${{ secrets.API_URL }}
+      run: npx playwright test
     
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
