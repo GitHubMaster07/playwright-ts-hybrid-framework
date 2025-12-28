@@ -13,6 +13,18 @@ This repository features a professional-grade **End-to-End (E2E) Hybrid Automati
 - **API Integrated Orchestration**: Uses Playwright’s native `request` context to perform "pre-test" state setup and "post-test" data cleanup, significantly reducing execution time.
 - **Cross-Platform Visual Regression**: Built-in snapshot comparison engine to identify UI regressions across Chromium, Firefox, and WebKit.
 
+```text
+    A[Test Scripts] --> B[Page Object Model]
+    A --> C[API Clients]
+    B --> D[Playwright Engine]
+    C --> D
+    D --> E{Environments}
+    E --> F[Dev]
+    E --> G[QA]
+    E --> H[Prod]
+    D --> I[Allure Reporting]
+    D --> J[Trace Viewer]
+```
 ## 🛠️ Technical Stack
 - **Engine**: Playwright (supporting Multi-Browser & Mobile Emulation)
 - **Language**: TypeScript (Strict Mode)
