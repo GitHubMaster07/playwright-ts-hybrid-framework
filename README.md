@@ -72,3 +72,9 @@ npx allure open allure-report
 ✅ Dynamic Data Injection: Native support for data-driven testing via JSON and TypeScript objects.
 
 ✅ Full Observability: Integrated recording of videos, console logs, and network traces for every test step.
+
+
+---
+### 👤 Author
+**Sergei Volodin** *Sr.QA Automation Engineer/SDET* 📍 Chicago, IL  
+🔗 [LinkedIn](https://www.linkedin.com/in/serge-vol/) | [GitHub Portfolio](https://github.com/GitHubMaster07/-Sergei-Volodin-_portfolio) | [Email](sergevolqaengineer@gmail.com)
