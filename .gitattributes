@@ -1,0 +1,9 @@
+# Exclude all JS files from statistics (forcing TS to be primary)
+*.js linguist-detectable=false
+*.js linguist-generated=true
+
+# Exclude documentation and reports
+playwright-report/** linguist-documentation
+allure-results/** linguist-documentation
+allure-report/** linguist-documentation
+test-results/** linguist-documentation
