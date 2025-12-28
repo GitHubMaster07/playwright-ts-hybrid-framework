@@ -146,4 +146,10 @@ vite.config.ts.timestamp-*
 /playwright/.auth/
 
 
+# Add this to your .gitignore file
+.data/
+allure-results/
+allure-report/
+test-results/
+
 *-snapshots/
