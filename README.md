@@ -50,6 +50,14 @@ npm install
 # Install browser binaries
 npx playwright install --with-deps
 ```
+### ⚙️ Configuration
+The framework uses `dotenv` for environment management. 
+1. Copy the template: `cp .env.template .env`
+2. Update the `BASE_URL` and credentials in the `.env` file.
+3. To switch environments via CLI:
+   ```bash
+   NODE_ENV=staging npx playwright test
+
 ### 3. Execution
 ```bash
 # Run all tests in parallel across all configured browsers
@@ -62,6 +70,22 @@ npx playwright test --grep "@smoke"
 npx allure generate allure-results --clean -o allure-report
 npx allure open allure-report
 ```
+---
+
+## 🔍 Failure Analysis & Observability
+For a Senior SDET, "Red" results are only the beginning. This framework provides high-fidelity debugging tools:
+
+* **Playwright Trace Viewer**: Every failed test generates a `.zip` trace. It allows you to step through the execution, inspect the DOM at each step, and view network traffic.
+    ```bash
+    # Open a trace file locally
+    npx playwright show-trace test-results/failed-test-trace.zip
+    ```
+* **Automatic Artifacts**: On first retry, the framework automatically captures:
+    - 🎥 **Video** recordings of the session.
+    - 📸 **Screenshots** at the exact moment of failure.
+    - 📄 **Console Logs** to catch frontend errors.
+* **Allure Integration**: Visualizes test trends and provides a breakdown of errors by category (Product vs. Infrastructure defects).
+---
 
 📈 **Enterprise Capabilities**
 
@@ -77,4 +101,4 @@ npx allure open allure-report
 ---
 ### 👤 Author
 **Sergei Volodin** *Sr.QA Automation Engineer/SDET* 📍 Chicago, IL  
-🔗 [LinkedIn](https://www.linkedin.com/in/serge-vol/) | [GitHub Portfolio](https://github.com/GitHubMaster07/-Sergei-Volodin-_portfolio) | [Email](sergevolqaengineer@gmail.com)
+🔗 [LinkedIn](https://www.linkedin.com/in/serge-vol/) | [GitHub Portfolio](https://github.com/GitHubMaster07/-Sergei-Volodin-_portfolio) | [Email](sergeiqaengineer@yandex.com)
