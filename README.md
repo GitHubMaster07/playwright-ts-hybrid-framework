@@ -45,6 +45,19 @@ This repository features a professional-grade **End-to-End (E2E) Hybrid Automati
 ├── playwright.config.ts  # Global Framework Configuration
 └── .env.template         # Environment Variable Template
 ```
+## 📖 Sample Test Showcase
+Tests are written in a declarative, readable style. Here is a sample Hybrid test validating both UI and API:
+
+```typescript
+test('should validate user profile update via UI and verify via API', async ({ loginPage, userApi }) => {
+  await loginPage.login(userCredentials);
+  await loginPage.updateNickname('NewName');
+  
+  // Direct API validation for high-fidelity check
+  const apiStatus = await userApi.getUserStatus(userCredentials.id);
+  expect(apiStatus.nickname).toBe('NewName');
+});
+```
 
 🚀 **Getting Started**
 1. Prerequisites
@@ -112,5 +125,9 @@ For a Senior SDET, "Red" results are only the beginning. This framework provides
 
 ---
 ### 👤 Author
-**Sergei Volodin** *Sr.QA Automation Engineer/SDET* 📍 Chicago, IL  
-🔗 [LinkedIn](https://www.linkedin.com/in/serge-vol/) | [GitHub Portfolio](https://github.com/GitHubMaster07/-Sergei-Volodin-_portfolio) | [Email](sergeiqaengineer@yandex.com)
+**Sergei Volodin** 
+
+*Sr.QA Automation Engineer/SDET* 
+
+📍 Chicago, IL  
+🔗 [LinkedIn](https://www.linkedin.com/in/serge-vol/) | [GitHub Portfolio](https://github.com/GitHubMaster07/-Sergei-Volodin-_portfolio) 
