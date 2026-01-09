@@ -1,45 +1,58 @@
 name: Playwright Tests
+
+# Orchestrating execution across delivery triggers
 on:
   push:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
-  # Allows you to run this manually from the Actions tab
+  # Enabling manual invocation for on-demand environment validation
   workflow_dispatch: 
 
 jobs:
   test:
+    # Defining a conservative boundary to prevent runaway cloud costs
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    
     steps:
     - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
+    
+    - name: Set up Node.js environment
+      uses: actions/setup-node@v4
       with:
         node-version: lts/*
+        # Enabling cache for faster dependency resolution in subsequent runs
+        cache: 'npm'
     
     - name: Install dependencies
+      # Using 'ci' for strict version adherence and deterministic builds
       run: npm ci
     
-    - name: Install Playwright Browsers
+    - name: Provision Playwright Binaries
+      # Isolating browser installation with system dependencies for Linux runner compatibility
       run: npx playwright install --with-deps
     
-    - name: Run Smoke Tests
+    - name: Gated Smoke Execution
+      # Fast-feedback loop: Runs only critical path scenarios on every code change
       if: github.event_name == 'push' || github.event_name == 'pull_request'
       env:
         BASE_URL: ${{ secrets.BASE_URL }}
         API_URL: ${{ secrets.API_URL }}
-      # Use quotes around the grep pattern for reliability
       run: npx playwright test --grep "@smoke"
 
-    - name: Run Full Suite
+    - name: Full Regression Execution
+      # On-demand deep validation: Full suite execution via manual trigger
       if: github.event_name == 'workflow_dispatch'
       env:
         BASE_URL: ${{ secrets.BASE_URL }}
         API_URL: ${{ secrets.API_URL }}
       run: npx playwright test
     
-    - uses: actions/upload-artifact@v4
+    - name: Archive Test Artifacts
+      # Preserving diagnostics (videos, traces, screenshots) for post-mortem analysis
       if: ${{ !cancelled() }}
+      uses: actions/upload-artifact@v4
       with:
         name: playwright-report
         path: playwright-report/
