@@ -3,7 +3,14 @@
   "version": "1.0.0",
   "description": "A modular, industry-agnostic E2E automation framework built with Playwright and TypeScript. Designed for high-performance testing of web applications, featuring scalable POM architecture, API integration, and multi-environment support.",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "clean": "rimraf test-results playwright-report allure-results allure-report",
+    "pretest": "npm run clean",
+    "test": "npx playwright test",
+    "test:smoke": "npx playwright test --grep @smoke",
+    "test:ui": "npx playwright test --ui",
+    "report:allure": "npx allure generate allure-results --clean -o allure-report && npx allure open allure-report"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/GitHubMaster07/playwright-ts-hybrid-framework.git"

@@ -1,2 +1,0 @@
-API Status Received: 200
-API Response verified: User is Leanne Graham
