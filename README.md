@@ -60,7 +60,7 @@ test('should validate user profile update via UI and verify via API', async ({ l
 ```
 
 🚀 **Getting Started**
-1. Prerequisites
+### 1. Prerequisites
 - Node.js (v18+)
 - VS Code (Recommended)
 
