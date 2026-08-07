@@ -1,52 +1,52 @@
-import dotenv from 'dotenv';
-dotenv.config();
 import { defineConfig, devices } from '@playwright/test';
+import dotenv from 'dotenv';
+
+dotenv.config({ quiet: true });
+
+const baseURL = process.env.BASE_URL ?? 'https://www.saucedemo.com';
 
 export default defineConfig({
   testDir: './tests',
-  
-  // 🧹 This points Playwright to your cleanup script
-  globalTeardown: require.resolve('./src/utils/global-teardown'),
 
-  /* Run tests in files in parallel */
   fullyParallel: true,
-  /* Fail the build on CI if you accidentally left test.only in the source code. */
+
   forbidOnly: !!process.env.CI,
-  /* Retry on CI only */
+
   retries: process.env.CI ? 2 : 0,
-  /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
-  
-  /* Reporter to use. */
+
+  workers: process.env.CI ? 2 : undefined,
+
   reporter: [
-    ['html'], 
-    ['allure-playwright']
+    ['html', { open: 'never' }],
+    ['allure-playwright'],
   ],
 
-  /* Shared settings for all projects. */
   use: {
-    /* Base URL from .env file */
-    baseURL: process.env.BASE_URL, 
+    baseURL,
 
-    /* Debugging tools */
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
-    video: 'retain-on-failure', // Added video for even better Senior-level reporting
+    video: 'retain-on-failure',
   },
 
-  /* Configure projects for major browsers */
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+        ...devices['Desktop Chrome'],
+      },
     },
     {
       name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      use: {
+        ...devices['Desktop Firefox'],
+      },
     },
     {
       name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      use: {
+        ...devices['Desktop Safari'],
+      },
     },
   ],
 });
