@@ -5,9 +5,11 @@
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 ## 📌 Executive Summary
+
 This repository features a professional-grade **End-to-End (E2E) Hybrid Automation Framework**. Unlike standard UI automation projects, this framework is engineered as a **Unified Testing Ecosystem** that orchestrates UI-driven user journeys with backend API validation to ensure absolute data integrity across the full application stack.
 
 ## 🏗️ Architectural Core
+
 - **Fluent Page Object Model (POM)**: Implements strictly-typed classes to decouple interaction logic from test scripts, ensuring high maintainability and 0% selector duplication.
 - **Type-Safe Environment Management**: Leverages TypeScript interfaces and `as const` assertions to manage multi-environment configurations (QA/Staging/Prod) securely.
 - **API Integrated Orchestration**: Uses Playwright’s native `request` context to perform "pre-test" state setup and "post-test" data cleanup, significantly reducing execution time.
@@ -25,7 +27,9 @@ This repository features a professional-grade **End-to-End (E2E) Hybrid Automati
     D --> I[Allure Reporting]
     D --> J[Trace Viewer]
 ```
+
 ## 🛠️ Technical Stack
+
 - **Engine**: Playwright (supporting Multi-Browser & Mobile Emulation)
 - **Language**: TypeScript (Strict Mode)
 - **Reporting**: **Allure Report** & Playwright Trace Viewer for deep failure analysis.
@@ -33,6 +37,7 @@ This repository features a professional-grade **End-to-End (E2E) Hybrid Automati
 - **Quality Gates**: ESLint & Prettier for consistent code standards.
 
 ## 🧩 Framework Structure
+
 ```text
 .
 ├── .github/workflows/    # CI/CD Pipeline (GitHub Actions)
@@ -45,14 +50,19 @@ This repository features a professional-grade **End-to-End (E2E) Hybrid Automati
 ├── playwright.config.ts  # Global Framework Configuration
 └── .env.template         # Environment Variable Template
 ```
+
 ## 📖 Sample Test Showcase
+
 Tests are written in a declarative, readable style. Here is a sample Hybrid test validating both UI and API:
 
 ```typescript
-test('should validate user profile update via UI and verify via API', async ({ loginPage, userApi }) => {
+test('should validate user profile update via UI and verify via API', async ({
+  loginPage,
+  userApi,
+}) => {
   await loginPage.login(userCredentials);
   await loginPage.updateNickname('NewName');
-  
+
   // Direct API validation for high-fidelity check
   const apiStatus = await userApi.getUserStatus(userCredentials.id);
   expect(apiStatus.nickname).toBe('NewName');
@@ -60,11 +70,14 @@ test('should validate user profile update via UI and verify via API', async ({ l
 ```
 
 🚀 **Getting Started**
+
 ### 1. Prerequisites
+
 - Node.js (v18+)
 - VS Code (Recommended)
 
 ### 2. Setup
+
 ```bash
 # Clone the repository
 git clone https://github.com/GitHubMaster07/playwright-ts-hybrid-framework.git
@@ -75,15 +88,20 @@ npm install
 # Install browser binaries
 npx playwright install --with-deps
 ```
+
 ### ⚙️ Configuration
-The framework uses `dotenv` for environment management. 
+
+The framework uses `dotenv` for environment management.
+
 1. Copy the template: `cp .env.template .env`
 2. Update the `BASE_URL` and credentials in the `.env` file.
 3. To switch environments via CLI:
    ```bash
    NODE_ENV=staging npx playwright test
+   ```
 
 ### 3. Execution
+
 ```bash
 # Run all tests in parallel across all configured browsers
 npx playwright test
@@ -95,21 +113,24 @@ npx playwright test --grep "@smoke"
 npx allure generate allure-results --clean -o allure-report
 npx allure open allure-report
 ```
+
 ---
 
 ## 🔍 Failure Analysis & Observability
+
 For a Senior SDET, "Red" results are only the beginning. This framework provides high-fidelity debugging tools:
 
-* **Playwright Trace Viewer**: Every failed test generates a `.zip` trace. It allows you to step through the execution, inspect the DOM at each step, and view network traffic.
-    ```bash
-    # Open a trace file locally
-    npx playwright show-trace test-results/failed-test-trace.zip
-    ```
-* **Automatic Artifacts**: On first retry, the framework automatically captures:
-    - 🎥 **Video** recordings of the session.
-    - 📸 **Screenshots** at the exact moment of failure.
-    - 📄 **Console Logs** to catch frontend errors.
-* **Allure Integration**: Visualizes test trends and provides a breakdown of errors by category (Product vs. Infrastructure defects).
+- **Playwright Trace Viewer**: Every failed test generates a `.zip` trace. It allows you to step through the execution, inspect the DOM at each step, and view network traffic.
+  ```bash
+  # Open a trace file locally
+  npx playwright show-trace test-results/failed-test-trace.zip
+  ```
+- **Automatic Artifacts**: On first retry, the framework automatically captures:
+  - 🎥 **Video** recordings of the session.
+  - 📸 **Screenshots** at the exact moment of failure.
+  - 📄 **Console Logs** to catch frontend errors.
+- **Allure Integration**: Visualizes test trends and provides a breakdown of errors by category (Product vs. Infrastructure defects).
+
 ---
 
 📈 **Enterprise Capabilities**
@@ -122,12 +143,13 @@ For a Senior SDET, "Red" results are only the beginning. This framework provides
 
 ✅ Full Observability: Integrated recording of videos, console logs, and network traces for every test step.
 
-
 ---
-### 👤 Author
-**Sergei Volodin** 
 
-*Sr.QA Automation Engineer/SDET* 
+### 👤 Author
+
+**Sergei Volodin**
+
+_Sr.QA Automation Engineer/SDET_
 
 📍 Chicago, IL  
-🔗 [LinkedIn](https://www.linkedin.com/in/serge-vol/) | [GitHub Portfolio](https://github.com/GitHubMaster07/-Sergei-Volodin-_portfolio) 
+🔗 [LinkedIn](https://www.linkedin.com/in/serge-vol/) | [GitHub Portfolio](https://github.com/GitHubMaster07/-Sergei-Volodin-_portfolio)

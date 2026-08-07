@@ -8,9 +8,7 @@ type UserResponse = {
 };
 
 test('should return the expected user contract from the API', async ({ request }) => {
-  const response = await request.get(
-    'https://jsonplaceholder.typicode.com/users/1'
-  );
+  const response = await request.get('https://jsonplaceholder.typicode.com/users/1');
 
   expect(response.ok()).toBeTruthy();
 
