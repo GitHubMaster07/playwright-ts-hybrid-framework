@@ -1,22 +1,34 @@
 {
   "name": "playwright-ts-hybrid-framework",
   "version": "1.0.0",
-  "description": "A modular, industry-agnostic E2E automation framework built with Playwright and TypeScript. Designed for high-performance testing of web applications, featuring scalable POM architecture, API integration, and multi-environment support.",
-  "main": "index.js",
+  "private": true,
+  "description": "A Playwright and TypeScript quality engineering framework demonstrating maintainable UI automation, API validation, visual testing, multi-browser execution, and CI/CD integration.",
   "scripts": {
     "clean": "rimraf test-results playwright-report allure-results allure-report",
     "pretest": "npm run clean",
-    "test": "npx playwright test",
-    "test:smoke": "npx playwright test --grep @smoke",
-    "test:ui": "npx playwright test --ui",
-    "report:allure": "npx allure generate allure-results --clean -o allure-report && npx allure open allure-report"
+    "test": "playwright test",
+    "test:smoke": "playwright test --grep @smoke",
+    "test:ui": "playwright test --ui",
+    "report:allure": "allure generate allure-results --clean -o allure-report && allure open allure-report"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/GitHubMaster07/playwright-ts-hybrid-framework.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "playwright",
+    "typescript",
+    "test-automation",
+    "quality-engineering",
+    "sdet",
+    "ui-testing",
+    "api-testing",
+    "visual-testing",
+    "e2e-testing",
+    "ci-cd",
+    "github-actions"
+  ],
+  "author": "Sergei Volodin",
   "license": "MIT",
   "type": "commonjs",
   "bugs": {
