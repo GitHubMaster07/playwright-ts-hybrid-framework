@@ -279,4 +279,4 @@ Senior Quality Engineer / SDET
 
 ---
 
-*This repository is maintained as part of my Quality Engineering portfolio and reflects engineering practices I use when building maintainable automation frameworks.*
+_This repository is maintained as part of my Quality Engineering portfolio and reflects engineering practices I use when building maintainable automation frameworks._
