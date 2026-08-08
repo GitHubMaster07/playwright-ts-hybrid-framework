@@ -10,11 +10,7 @@
     "types": ["node", "@playwright/test"],
     "noEmit": true
   },
-  "include": [
-    "playwright.config.ts",
-    "src/**/*.ts",
-    "tests/**/*.ts"
-  ],
+  "include": ["playwright.config.ts", "src/**/*.ts", "tests/**/*.ts"],
   "exclude": [
     "node_modules",
     "playwright-report",
