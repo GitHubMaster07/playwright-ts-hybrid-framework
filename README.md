@@ -1,282 +1,199 @@
 # Playwright TypeScript Automation Framework 🎭
 
-![Playwright](https://img.shields.io/badge/Playwright-1.57-brightgreen)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)
-![GitHub Actions](https://img.shields.io/badge/CI-GitHub%20Actions-success)
-![ESLint](https://img.shields.io/badge/ESLint-Enabled-purple)
-![Prettier](https://img.shields.io/badge/Prettier-Formatted-orange)
+<p align="center">
+
+![Build](https://github.com/GitHubMaster07/playwright-typescript-quality-framework/actions/workflows/playwright.yml/badge.svg)
+![Playwright](https://img.shields.io/badge/Playwright-Test_Automation-45ba4b?logo=playwright&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-Strict-3178C6?logo=typescript&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/CI-GitHub_Actions-2088FF?logo=githubactions&logoColor=white)
+![ESLint](https://img.shields.io/badge/ESLint-Quality_Gate-4B32C3?logo=eslint&logoColor=white)
+![Prettier](https://img.shields.io/badge/Formatter-Prettier-F7B93E?logo=prettier&logoColor=black)
 ![License](https://img.shields.io/badge/License-MIT-green)
+![Version](https://img.shields.io/badge/Version-v1.0.0-blue)
 
-A maintainable Playwright automation framework built with TypeScript.
+</p>
 
-This repository demonstrates modern Quality Engineering practices including:
-
-- UI automation
-- API validation
-- Visual regression testing
-- Cross-browser execution
-- GitHub Actions CI
-- TypeScript quality gates
-
-The goal of this project is to demonstrate a clean, maintainable approach to browser automation rather than maximize the number of test cases.
+A production-inspired Playwright automation framework built with **TypeScript** demonstrating scalable test architecture, UI automation, API validation, hybrid testing and enterprise CI/CD practices.
 
 ---
 
-# Design Principles
+## Key Capabilities
 
-The framework is intentionally built around several engineering principles.
-
-- Keep business tests readable.
-- Separate test logic from page interactions.
-- Prefer stable selectors (`data-test`) over brittle CSS selectors.
-- Execute safely in parallel.
-- Keep failures easy to investigate.
-- Validate code quality before running automated tests.
-
----
-
-# Repository Highlights
-
-- Playwright Test Runner
-- TypeScript (Strict Mode)
-- Page Object Model (POM)
-- API validation using Playwright Request API
-- Visual regression testing
-- Cross-browser execution
-- GitHub Actions CI
-- ESLint
-- Prettier
-- Allure Reporting
-- Playwright Trace Viewer
+- ✅ Page Object Model (POM)
+- ✅ API Client Layer
+- ✅ Custom Playwright Fixtures
+- ✅ Dependency Injection
+- ✅ UI Automation
+- ✅ API Validation
+- ✅ Hybrid UI ↔ API Validation
+- ✅ Visual Regression Testing
+- ✅ Cross-browser & Parallel Execution
+- ✅ GitHub Actions CI/CD
+- ✅ TypeScript Strict Mode
+- ✅ ESLint & Prettier
+- ✅ HTML Report, Allure & Trace Viewer
 
 ---
 
-# Architecture
+## Why This Project?
+
+This repository focuses on engineering quality rather than simply browser automation. It demonstrates clean architecture, reusable components, dependency injection, service-layer design, CI/CD integration and maintainable automation practices.
+
+---
+
+## Architecture
 
 ```text
-                    +----------------------+
-                    |     Test Suites      |
-                    +----------+-----------+
-                               |
-                               v
-                    +----------------------+
-                    |   Page Objects (POM) |
-                    +----------+-----------+
-                               |
-                 +-------------+-------------+
-                 |                           |
-                 v                           v
-        +----------------+         +-----------------+
-        | Browser UI     |         | API Validation  |
-        +----------------+         +-----------------+
-                 \                  /
-                  \                /
-                   v              v
-              +------------------------+
-              |   Playwright Engine    |
-              +------------------------+
-                         |
-         +---------------+----------------+
-         |               |                |
-         v               v                v
-    Chromium         Firefox          WebKit
+                   Test Suites
+                        │
+                        ▼
+              Playwright Fixtures
+                        │
+          ┌─────────────┴─────────────┐
+          ▼                           ▼
+    Page Objects                 API Clients
+          │                           │
+          └─────────────┬─────────────┘
+                        ▼
+                 Playwright Engine
+                        │
+          ┌─────────────┼─────────────┐
+          ▼             ▼             ▼
+      Chromium       Firefox       WebKit
 ```
 
 ---
 
-# Project Structure
+## Project Structure
 
 ```text
 .
-├── .github/
-│   └── workflows/
-│       └── playwright.yml
-│
+├── .github/workflows/
 ├── src/
-│   ├── data/
+│   ├── api/
+│   ├── fixtures/
 │   ├── pages/
+│   ├── data/
 │   └── utils/
-│
 ├── tests/
-│
 ├── playwright.config.ts
-├── tsconfig.json
 ├── package.json
 └── README.md
 ```
 
 ---
 
-# Technology Stack
+## Technology Stack
 
-| Area       | Technology           |
-| ---------- | -------------------- |
-| Language   | TypeScript           |
-| Framework  | Playwright           |
-| Assertions | Playwright Test      |
-| Reporting  | HTML Report + Allure |
-| Linting    | ESLint               |
-| Formatting | Prettier             |
-| CI/CD      | GitHub Actions       |
-
----
-
-# Quality Gates
-
-Every push and pull request is validated through GitHub Actions.
-
-The pipeline performs:
-
-- TypeScript type checking
-- ESLint validation
-- Prettier formatting check
-- Smoke test execution
-- HTML report generation
-- Test artifact upload
+| Area         | Technology             |
+| ------------ | ---------------------- |
+| Language     | TypeScript             |
+| Framework    | Playwright             |
+| API          | Playwright Request API |
+| Pattern      | Page Object Model      |
+| Architecture | API Clients + Fixtures |
+| Reporting    | HTML Report + Allure   |
+| CI/CD        | GitHub Actions         |
+| Code Quality | ESLint + Prettier      |
 
 ---
 
-# Current Test Coverage
+## Quality Gates
 
-This repository currently demonstrates:
+Every push and pull request validates:
 
-- Login workflow automation
-- API response validation
-- Visual regression testing
-- Cross-browser execution
-- Smoke testing
-- Parallel execution
-- Failure diagnostics
+- TypeScript
+- ESLint
+- Prettier
+- Smoke Tests
+- HTML Report generation
+- Artifact upload
 
----
-
-# Getting Started
-
-## Prerequisites
-
-- Node.js 18+
-- npm
-
-Clone the repository.
+Local workflow:
 
 ```bash
-git clone https://github.com/GitHubMaster07/playwright-typescript-quality-framework.git
-
-cd playwright-typescript-quality-framework
-```
-
-Install dependencies.
-
-```bash
-npm install
-```
-
-Install Playwright browsers.
-
-```bash
-npx playwright install --with-deps
-```
-
----
-
-# Environment Configuration
-
-Create a `.env` file.
-
-Example:
-
-```text
-BASE_URL=https://www.saucedemo.com
-```
-
----
-
-# Running Tests
-
-Run the complete suite.
-
-```bash
+npm run lint
+npm run format:check
+npm run typecheck
 npm test
 ```
 
-Run smoke tests.
+---
 
-```bash
-npm run test:smoke
-```
+## Engineering Decisions
 
-Run Playwright UI mode.
-
-```bash
-npm run test:ui
-```
+- **Page Objects** isolate browser interactions.
+- **API Clients** encapsulate backend communication.
+- **Custom Fixtures** provide dependency injection.
+- **Hybrid UI ↔ API** validates business data across layers.
+- **Parallel Execution** uses isolated browser contexts.
 
 ---
 
-# Reports
-
-Generate the Allure report.
+## Getting Started
 
 ```bash
+git clone https://github.com/GitHubMaster07/playwright-typescript-quality-framework.git
+cd playwright-typescript-quality-framework
+npm install
+npx playwright install --with-deps
+```
+
+Run tests:
+
+```bash
+npm test
+npm run test:smoke
+npm run test:ui
 npm run report:allure
 ```
 
-Playwright automatically provides:
+---
+
+## Reports
 
 - HTML Report
+- Allure Report
 - Trace Viewer
 - Screenshots
 - Videos
-- Failure artifacts
+- Failure Artifacts
+
+Recommended screenshots:
+
+- docs/images/github-actions.png
+- docs/images/playwright-report.png
+- docs/images/allure-report.png
 
 ---
 
-# Engineering Decisions
+## Roadmap
 
-Several implementation decisions were made intentionally.
-
-### Page Object Model
-
-Keeps selectors and browser interactions separate from business assertions.
-
-### Stable Selectors
-
-Tests use `data-test` attributes whenever available to reduce maintenance.
-
-### Strict TypeScript
-
-Type checking is enforced before test execution.
-
-### Automated Quality Gates
-
-Formatting, linting, and type validation run before browser automation in CI.
+- Contract Testing
+- Authentication
+- Docker
+- Test Data Builders
+- Accessibility
+- Performance Testing
 
 ---
 
-# Future Improvements
+## Release
 
-Possible enhancements include:
+**Current Version:** **v1.0.0**
 
-- reusable API client layer
-- custom Playwright fixtures
-- contract testing examples
-- Docker execution
-- test data factories
-- additional business scenarios
+Initial portfolio release demonstrating a production-inspired Playwright framework with reusable architecture, API clients, fixtures, hybrid validation and CI/CD quality gates.
 
 ---
 
-# Author
+## Author
 
-**Sergei Volodin**
-
+**Sergei Volodin**  
 Senior Quality Engineer / SDET
-
-📍 Chicago, Illinois
 
 - LinkedIn: https://www.linkedin.com/in/serge-vol/
 - GitHub Portfolio: https://github.com/GitHubMaster07/-Sergei-Volodin-_portfolio
 
 ---
 
-_This repository is maintained as part of my Quality Engineering portfolio and reflects engineering practices I use when building maintainable automation frameworks._
+⭐ If you find this repository useful, consider starring it on GitHub.
