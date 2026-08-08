@@ -1,5 +1,5 @@
 {
-  "name": "playwright-ts-hybrid-framework",
+  "name": "playwright-typescript-quality-framework",
   "version": "1.0.0",
   "private": true,
   "description": "A Playwright and TypeScript quality engineering framework demonstrating maintainable UI automation, API validation, visual testing, multi-browser execution, and CI/CD integration.",
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/GitHubMaster07/playwright-ts-hybrid-framework.git"
+    "url": "git+https://github.com/GitHubMaster07/playwright-typescript-quality-framework.git"
   },
   "keywords": [
     "playwright",
@@ -36,9 +36,9 @@
   "license": "MIT",
   "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/GitHubMaster07/playwright-ts-hybrid-framework/issues"
+    "url": "https://github.com/GitHubMaster07/playwright-typescript-quality-framework/issues"
   },
-  "homepage": "https://github.com/GitHubMaster07/playwright-ts-hybrid-framework#readme",
+  "homepage": "https://github.com/GitHubMaster07/playwright-typescript-quality-framework#readme",
   "devDependencies": {
     "@playwright/test": "^1.57.0",
     "@types/node": "^25.0.3",

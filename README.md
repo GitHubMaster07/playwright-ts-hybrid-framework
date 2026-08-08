@@ -160,9 +160,9 @@ This repository currently demonstrates:
 Clone the repository.
 
 ```bash
-git clone https://github.com/GitHubMaster07/playwright-ts-hybrid-framework.git
+git clone https://github.com/GitHubMaster07/playwright-typescript-quality-framework.git
 
-cd playwright-ts-hybrid-framework
+cd playwright-typescript-quality-framework
 ```
 
 Install dependencies.
@@ -270,7 +270,7 @@ Possible enhancements include:
 
 **Sergei Volodin**
 
-Senior QA Automation Engineer / SDET
+Senior Quality Engineer / SDET
 
 📍 Chicago, Illinois
 
@@ -279,4 +279,4 @@ Senior QA Automation Engineer / SDET
 
 ---
 
-_This repository is maintained as part of my Quality Engineering portfolio and reflects engineering practices I use when building maintainable automation frameworks._
+*This repository is maintained as part of my Quality Engineering portfolio and reflects engineering practices I use when building maintainable automation frameworks.*
