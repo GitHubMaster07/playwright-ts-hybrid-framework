@@ -41,17 +41,14 @@ jobs:
       - name: Check formatting
         run: npm run format:check
 
-      # Push/PR validation only needs Chromium.
       - name: Install Chromium
         if: github.event_name != 'workflow_dispatch'
         run: npx playwright install --with-deps chromium
 
-      # Manual regression validates all configured browsers.
       - name: Install all Playwright browsers
         if: github.event_name == 'workflow_dispatch'
         run: npx playwright install --with-deps
 
-      # Fast but meaningful validation for every push and pull request.
       - name: Run Chromium validation suite
         if: github.event_name != 'workflow_dispatch'
         run: >
@@ -62,10 +59,25 @@ jobs:
           tests/visual.spec.ts
           --project=chromium
 
-      # Full cross-browser regression is available on demand.
+      - name: Generate Linux visual baseline
+        if: github.event_name == 'workflow_dispatch'
+        run: >
+          npx playwright test
+          tests/visual.spec.ts
+          --project=chromium
+          --update-snapshots
+
       - name: Run full regression
         if: github.event_name == 'workflow_dispatch'
         run: npx playwright test
+
+      - name: Upload Visual Baselines
+        if: github.event_name == 'workflow_dispatch'
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-baselines
+          path: tests/visual.spec.ts-snapshots
+          retention-days: 7
 
       - name: Upload Playwright HTML Report
         if: always()
