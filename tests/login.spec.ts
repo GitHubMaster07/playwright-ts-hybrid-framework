@@ -1,10 +1,7 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from '../src/fixtures/testFixtures';
 import { testData } from '../src/data/testData';
-import { LoginPage } from '../src/pages/LoginPage';
 
-test('should authenticate a standard user successfully @smoke', async ({ page }) => {
-  const loginPage = new LoginPage(page);
-
+test('should authenticate a standard user successfully @smoke', async ({ loginPage, page }) => {
   await loginPage.navigateTo('/');
   await loginPage.login(testData.users.standard);
 
