@@ -59,12 +59,11 @@ jobs:
           tests/visual.spec.ts
           --project=chromium
 
-      - name: Generate Linux visual baseline
+      - name: Generate Linux visual baselines
         if: github.event_name == 'workflow_dispatch'
         run: >
           npx playwright test
           tests/visual.spec.ts
-          --project=chromium
           --update-snapshots
 
       - name: Run full regression
