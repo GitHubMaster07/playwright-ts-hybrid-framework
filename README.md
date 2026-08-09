@@ -120,6 +120,41 @@ npm test
 
 ---
 
+## Reliability Strategy
+
+This portfolio framework intentionally uses public demo applications and APIs. Because these external systems are not controlled by the repository, failures are classified before being treated as product regressions.
+
+### Failure Classification
+
+- **Product failure** — deterministic assertion failure caused by incorrect application behavior.
+- **Infrastructure failure** — DNS, TLS, timeout, service outage, or external dependency unavailability.
+- **Visual failure** — approved baseline differs from the rendered UI.
+- **Flaky failure** — a test produces inconsistent results without a deterministic product change.
+
+### Reliability Controls
+
+- CI retries are enabled only in CI to reduce noise from transient infrastructure issues.
+- Pull requests run a focused Chromium validation suite for fast feedback.
+- Full Chromium, Firefox, and WebKit regression runs manually and on a scheduled basis.
+- Screenshots, videos, traces, HTML reports, and test artifacts are retained for investigation.
+- Visual baselines are version-controlled separately for Windows and Linux.
+- External-service failures should be investigated before updating assertions or visual baselines.
+
+### Flakiness Policy
+
+A failing test should not be automatically classified as flaky.
+
+Before changing or quarantining a test:
+
+1. Reproduce the failure.
+2. Review Playwright trace, screenshot, video, and network behavior.
+3. Determine whether the failure originated from the application, test code, or external infrastructure.
+4. Update the test only when the root cause is understood.
+
+Retries are diagnostic protection against transient failures, not a substitute for fixing unstable tests.
+
+---
+
 ## Engineering Decisions
 
 - **Page Objects** isolate browser interactions.
