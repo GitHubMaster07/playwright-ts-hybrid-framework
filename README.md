@@ -342,9 +342,9 @@ The framework intentionally avoids adding features solely to increase repository
 
 ## Release
 
-**Current Version:** **v1.0.0**
+**Current Version:** **v1.1.0**
 
-Initial portfolio release demonstrating a production-inspired Playwright framework with reusable architecture, API clients, custom fixtures, hybrid validation, visual regression, and CI/CD quality gates.
+Stabilized portfolio release featuring centralized environment configuration, reusable API clients, Zod runtime contract validation, custom Playwright fixtures, hybrid UI ↔ API validation, cross-platform visual regression, and scheduled cross-browser CI.
 
 ---
 
