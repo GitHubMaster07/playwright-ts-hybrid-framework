@@ -18,10 +18,6 @@ export class RoomsPage extends BasePage {
     await this.roomCards.first().waitFor({ state: 'visible' });
   }
 
-  async getRoomCount(): Promise<number> {
-    return this.roomCards.count();
-  }
-
   async getRoomTitles(): Promise<string[]> {
     return this.roomTitles.allInnerTexts();
   }

@@ -1,35 +1,49 @@
 import { APIRequestContext, APIResponse } from '@playwright/test';
+import { z } from 'zod';
 import { environment } from '../config/environment';
 
-export type Room = {
-  roomid: number;
-  roomName: string;
-  type: string;
-  accessible: boolean;
-  roomPrice: number;
-  features: string[];
-};
+const roomSchema = z.object({
+  roomid: z.number(),
+  roomName: z.string(),
+  type: z.string(),
+  accessible: z.boolean(),
+  roomPrice: z.number(),
+  features: z.array(z.string()),
+});
 
-type RoomsResponse = {
-  rooms: Room[];
+const roomsResponseSchema = z.object({
+  rooms: z.array(roomSchema),
+});
+
+export type Room = z.infer<typeof roomSchema>;
+
+export type RoomsResponse = {
+  response: APIResponse;
+  data: Room[];
 };
 
 export class RoomApiClient {
   constructor(private readonly request: APIRequestContext) {}
 
-  async getRooms(): Promise<APIResponse> {
-    return this.request.get(`${environment.roomsApiUrl}/room/`);
-  }
-
-  async getRoomsData(): Promise<Room[]> {
-    const response = await this.getRooms();
+  async getRooms(): Promise<RoomsResponse> {
+    const response = await this.request.get(`${environment.roomsApiUrl}/room/`);
 
     if (!response.ok()) {
       throw new Error(`Failed to retrieve rooms: ${response.status()} ${response.statusText()}`);
     }
 
-    const body = (await response.json()) as RoomsResponse;
+    const body = await response.json();
+    const data = roomsResponseSchema.parse(body);
 
-    return body.rooms;
+    return {
+      response,
+      data: data.rooms,
+    };
+  }
+
+  async getRoomsData(): Promise<Room[]> {
+    const { data } = await this.getRooms();
+
+    return data;
   }
 }
