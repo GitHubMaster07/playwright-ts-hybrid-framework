@@ -9,6 +9,9 @@ on:
 
   workflow_dispatch:
 
+  schedule:
+    - cron: '0 6 * * *'
+
 jobs:
   playwright:
     name: Playwright Test Suite
@@ -41,15 +44,15 @@ jobs:
         run: npm run format:check
 
       - name: Install Chromium
-        if: github.event_name != 'workflow_dispatch'
+        if: github.event_name == 'push' || github.event_name == 'pull_request'
         run: npx playwright install --with-deps chromium
 
       - name: Install all Playwright browsers
-        if: github.event_name == 'workflow_dispatch'
+        if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
         run: npx playwright install --with-deps
 
       - name: Run Chromium validation suite
-        if: github.event_name != 'workflow_dispatch'
+        if: github.event_name == 'push' || github.event_name == 'pull_request'
         run: >
           npx playwright test
           tests/login.spec.ts
@@ -59,7 +62,7 @@ jobs:
           --project=chromium
 
       - name: Run full regression
-        if: github.event_name == 'workflow_dispatch'
+        if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
         run: npx playwright test
 
       - name: Upload Playwright HTML Report
