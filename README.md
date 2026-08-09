@@ -1,19 +1,6 @@
 # Playwright TypeScript Automation Framework 🎭
 
-<p align="center">
-
-![Build](https://github.com/GitHubMaster07/playwright-typescript-quality-framework/actions/workflows/playwright.yml/badge.svg)
-![Playwright](https://img.shields.io/badge/Playwright-Test_Automation-45ba4b?logo=playwright&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-Strict-3178C6?logo=typescript&logoColor=white)
-![GitHub Actions](https://img.shields.io/badge/CI-GitHub_Actions-2088FF?logo=githubactions&logoColor=white)
-![ESLint](https://img.shields.io/badge/ESLint-Quality_Gate-4B32C3?logo=eslint&logoColor=white)
-![Prettier](https://img.shields.io/badge/Formatter-Prettier-F7B93E?logo=prettier&logoColor=black)
-![License](https://img.shields.io/badge/License-MIT-green)
-![Version](https://img.shields.io/badge/Version-v1.0.0-blue)
-
-</p>
-
-A production-inspired Playwright automation framework built with **TypeScript** demonstrating scalable test architecture, UI automation, API validation, hybrid testing and enterprise CI/CD practices.
+A production-inspired Playwright automation framework built with **TypeScript**, demonstrating maintainable test architecture, UI automation, API validation, runtime contract validation, hybrid testing, visual regression, and CI/CD quality gates.
 
 ---
 
@@ -23,12 +10,15 @@ A production-inspired Playwright automation framework built with **TypeScript** 
 - ✅ API Client Layer
 - ✅ Custom Playwright Fixtures
 - ✅ Dependency Injection
+- ✅ Centralized Environment Configuration
 - ✅ UI Automation
 - ✅ API Validation
+- ✅ Runtime API Contract Validation with Zod
 - ✅ Hybrid UI ↔ API Validation
 - ✅ Visual Regression Testing
 - ✅ Cross-browser & Parallel Execution
 - ✅ GitHub Actions CI/CD
+- ✅ Scheduled Cross-browser Regression
 - ✅ TypeScript Strict Mode
 - ✅ ESLint & Prettier
 - ✅ HTML Report, Allure & Trace Viewer
@@ -37,29 +27,34 @@ A production-inspired Playwright automation framework built with **TypeScript** 
 
 ## Why This Project?
 
-This repository focuses on engineering quality rather than simply browser automation. It demonstrates clean architecture, reusable components, dependency injection, service-layer design, CI/CD integration and maintainable automation practices.
+This repository focuses on engineering quality rather than simply browser automation. It demonstrates clean architecture, reusable components, dependency injection, service-layer design, runtime validation, CI/CD integration, and maintainable automation practices.
+
+The framework intentionally keeps the test suite compact. The goal is to demonstrate engineering decisions and reusable patterns rather than maximize the number of test cases.
 
 ---
 
 ## Architecture
 
 ```text
-                   Test Suites
-                        │
-                        ▼
-              Playwright Fixtures
-                        │
-          ┌─────────────┴─────────────┐
-          ▼                           ▼
-    Page Objects                 API Clients
-          │                           │
-          └─────────────┬─────────────┘
-                        ▼
-                 Playwright Engine
-                        │
-          ┌─────────────┼─────────────┐
-          ▼             ▼             ▼
-      Chromium       Firefox       WebKit
+                  Environment Config
+                         │
+                         ▼
+                    Test Suites
+                         │
+                         ▼
+               Playwright Fixtures
+                         │
+          ┌──────────────┴──────────────┐
+          ▼                             ▼
+     Page Objects                  API Clients
+          │                             │
+          └──────────────┬──────────────┘
+                         ▼
+                  Playwright Engine
+                         │
+          ┌──────────────┼──────────────┐
+          ▼              ▼              ▼
+      Chromium        Firefox        WebKit
 ```
 
 ---
@@ -68,14 +63,17 @@ This repository focuses on engineering quality rather than simply browser automa
 
 ```text
 .
-├── .github/workflows/
+├── .github/
+│   └── workflows/
 ├── src/
 │   ├── api/
+│   ├── config/
+│   ├── data/
 │   ├── fixtures/
 │   ├── pages/
-│   ├── data/
 │   └── utils/
 ├── tests/
+│   └── visual.spec.ts-snapshots/
 ├── playwright.config.ts
 ├── package.json
 └── README.md
@@ -85,16 +83,18 @@ This repository focuses on engineering quality rather than simply browser automa
 
 ## Technology Stack
 
-| Area         | Technology             |
-| ------------ | ---------------------- |
-| Language     | TypeScript             |
-| Framework    | Playwright             |
-| API          | Playwright Request API |
-| Pattern      | Page Object Model      |
-| Architecture | API Clients + Fixtures |
-| Reporting    | HTML Report + Allure   |
-| CI/CD        | GitHub Actions         |
-| Code Quality | ESLint + Prettier      |
+| Area              | Technology                    |
+| ----------------- | ----------------------------- |
+| Language          | TypeScript                    |
+| Framework         | Playwright                    |
+| API               | Playwright Request API        |
+| Runtime Contracts | Zod                           |
+| Pattern           | Page Object Model             |
+| Architecture      | API Clients + Custom Fixtures |
+| Configuration     | dotenv + Environment Config   |
+| Reporting         | HTML Report + Allure          |
+| CI/CD             | GitHub Actions                |
+| Code Quality      | ESLint + Prettier             |
 
 ---
 
@@ -102,14 +102,20 @@ This repository focuses on engineering quality rather than simply browser automa
 
 Every push and pull request validates:
 
-- TypeScript
+- TypeScript type checking
 - ESLint
 - Prettier
-- Smoke Tests
-- HTML Report generation
-- Artifact upload
+- Focused Chromium validation
+  - UI
+  - API
+  - Hybrid UI ↔ API
+  - Visual regression
+- HTML report generation
+- Test artifact upload
 
-Local workflow:
+Full Chromium, Firefox, and WebKit regression is available through manual workflow execution and scheduled CI runs.
+
+Local quality workflow:
 
 ```bash
 npm run lint
@@ -117,6 +123,73 @@ npm run format:check
 npm run typecheck
 npm test
 ```
+
+---
+
+## Environment Configuration
+
+Environment-specific endpoints are centralized in the framework configuration rather than hardcoded across tests, page objects, and API clients.
+
+Supported configuration includes:
+
+- `BASE_URL`
+- `USERS_API_URL`
+- `ROOMS_API_URL`
+- `ROOMS_UI_URL`
+
+Public demo endpoints have local fallback values so the repository can be cloned and executed without mandatory secrets.
+
+A local `.env` file can be used to override defaults when needed.
+
+---
+
+## API Architecture
+
+Backend communication is encapsulated in reusable API clients instead of being performed directly inside tests.
+
+The API layer provides:
+
+- centralized endpoint configuration
+- HTTP status validation
+- typed response models
+- runtime response validation
+- reusable API operations
+- separation between test intent and transport logic
+
+Runtime schema validation is implemented with **Zod**, allowing API payloads to be validated at execution time rather than relying only on TypeScript compile-time assertions.
+
+---
+
+## Hybrid UI ↔ API Validation
+
+The framework includes a hybrid scenario that validates application data across frontend and backend layers.
+
+The test:
+
+1. Retrieves room data through the API client.
+2. Opens the corresponding UI.
+3. Reads rendered room information through the Page Object.
+4. Compares UI data with the backend response.
+
+This demonstrates cross-layer validation while keeping API, UI, and test responsibilities separated.
+
+---
+
+## Visual Regression
+
+Playwright screenshot assertions provide visual regression coverage.
+
+Approved visual baselines are version-controlled for:
+
+- Windows
+- Linux
+- Chromium
+- Firefox
+- WebKit
+
+CI compares rendered output against approved Linux baselines rather than generating new baselines during validation.
+
+Baseline updates are intentional changes and should be reviewed before being committed.
 
 ---
 
@@ -138,7 +211,7 @@ This portfolio framework intentionally uses public demo applications and APIs. B
 - Full Chromium, Firefox, and WebKit regression runs manually and on a scheduled basis.
 - Screenshots, videos, traces, HTML reports, and test artifacts are retained for investigation.
 - Visual baselines are version-controlled separately for Windows and Linux.
-- External-service failures should be investigated before updating assertions or visual baselines.
+- External-service failures are investigated before assertions or visual baselines are changed.
 
 ### Flakiness Policy
 
@@ -157,15 +230,21 @@ Retries are diagnostic protection against transient failures, not a substitute f
 
 ## Engineering Decisions
 
-- **Page Objects** isolate browser interactions.
-- **API Clients** encapsulate backend communication.
-- **Custom Fixtures** provide dependency injection.
-- **Hybrid UI ↔ API** validates business data across layers.
-- **Parallel Execution** uses isolated browser contexts.
+- **Page Objects** isolate selectors and browser interactions from business assertions.
+- **API Clients** encapsulate backend communication and response handling.
+- **Custom Fixtures** provide reusable dependency injection for pages and API clients.
+- **Environment Configuration** keeps endpoints outside implementation classes.
+- **Runtime Contracts** validate external API payloads instead of relying only on TypeScript casts.
+- **Hybrid UI ↔ API Testing** validates business data across application layers.
+- **Visual Baselines** are version-controlled and platform-specific.
+- **Parallel Execution** uses isolated Playwright browser contexts.
+- **Focused PR Validation** provides fast feedback while scheduled regression preserves broader cross-browser coverage.
 
 ---
 
 ## Getting Started
+
+Clone the repository and install dependencies:
 
 ```bash
 git clone https://github.com/GitHubMaster07/playwright-typescript-quality-framework.git
@@ -174,42 +253,76 @@ npm install
 npx playwright install --with-deps
 ```
 
-Run tests:
+Run the complete test suite:
 
 ```bash
 npm test
+```
+
+Additional commands:
+
+```bash
 npm run test:smoke
 npm run test:ui
+npm run lint
+npm run format:check
+npm run typecheck
 npm run report:allure
 ```
 
 ---
 
-## Reports
+## Reports & Diagnostics
 
-- HTML Report
+The framework provides:
+
+- Playwright HTML Report
 - Allure Report
-- Trace Viewer
-- Screenshots
-- Videos
-- Failure Artifacts
+- Playwright Trace Viewer
+- Screenshots on failure
+- Video on failure
+- CI test artifacts
 
-Recommended screenshots:
+These artifacts support root-cause investigation without requiring immediate local reproduction.
 
-- docs/images/github-actions.png
-- docs/images/playwright-report.png
-- docs/images/allure-report.png
+---
+
+## CI Strategy
+
+The CI pipeline separates fast feedback from broader regression coverage.
+
+### Push / Pull Request
+
+Runs quality gates followed by a focused Chromium validation suite covering:
+
+- login workflow
+- API validation
+- hybrid UI ↔ API validation
+- visual regression
+
+### Manual / Scheduled Execution
+
+Runs the complete test suite across:
+
+- Chromium
+- Firefox
+- WebKit
+
+This keeps pull-request feedback focused while preserving regular cross-browser validation.
 
 ---
 
 ## Roadmap
 
-- Contract Testing
-- Authentication
-- Docker
-- Test Data Builders
-- Accessibility
-- Performance Testing
+Potential future extensions:
+
+- Expand runtime schema validation across additional APIs
+- Authentication state management
+- Test data builders
+- Accessibility validation
+- Performance testing
+
+The framework intentionally avoids adding features solely to increase repository size; future additions should demonstrate a distinct Quality Engineering capability.
 
 ---
 
@@ -217,7 +330,7 @@ Recommended screenshots:
 
 **Current Version:** **v1.0.0**
 
-Initial portfolio release demonstrating a production-inspired Playwright framework with reusable architecture, API clients, fixtures, hybrid validation and CI/CD quality gates.
+Initial portfolio release demonstrating a production-inspired Playwright framework with reusable architecture, API clients, custom fixtures, hybrid validation, visual regression, and CI/CD quality gates.
 
 ---
 
