@@ -1,5 +1,19 @@
 # Playwright TypeScript Automation Framework 🎭
 
+<p align="center">
+
+![Build](https://github.com/GitHubMaster07/playwright-typescript-quality-framework/actions/workflows/playwright.yml/badge.svg)
+![GitHub Release](https://img.shields.io/github/v/release/GitHubMaster07/playwright-typescript-quality-framework)
+![Playwright](https://img.shields.io/badge/Playwright-Test_Automation-45ba4b?logo=playwright&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-Strict-3178C6?logo=typescript&logoColor=white)
+![ESLint](https://img.shields.io/badge/ESLint-Quality_Gate-4B32C3?logo=eslint&logoColor=white)
+![Prettier](https://img.shields.io/badge/Formatter-Prettier-F7B93E?logo=prettier&logoColor=black)
+![License](https://img.shields.io/badge/License-MIT-green)
+![GitHub Stars](https://img.shields.io/github/stars/GitHubMaster07/playwright-typescript-quality-framework)
+![Last Commit](https://img.shields.io/github/last-commit/GitHubMaster07/playwright-typescript-quality-framework)
+
+</p>
+
 A production-inspired Playwright automation framework built with **TypeScript**, demonstrating maintainable test architecture, UI automation, API validation, runtime contract validation, hybrid testing, visual regression, and CI/CD quality gates.
 
 ---
