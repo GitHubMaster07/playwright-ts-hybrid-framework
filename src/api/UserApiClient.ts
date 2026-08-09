@@ -8,15 +8,16 @@ export type User = {
   email: string;
 };
 
+export type UserResponse = {
+  response: APIResponse;
+  data: User;
+};
+
 export class UserApiClient {
   constructor(private readonly request: APIRequestContext) {}
 
-  async getUser(userId: number): Promise<APIResponse> {
-    return this.request.get(`${environment.usersApiUrl}/users/${userId}`);
-  }
-
-  async getUserData(userId: number): Promise<User> {
-    const response = await this.getUser(userId);
+  async getUser(userId: number): Promise<UserResponse> {
+    const response = await this.request.get(`${environment.usersApiUrl}/users/${userId}`);
 
     if (!response.ok()) {
       throw new Error(
@@ -24,6 +25,11 @@ export class UserApiClient {
       );
     }
 
-    return (await response.json()) as User;
+    const data = (await response.json()) as User;
+
+    return {
+      response,
+      data,
+    };
   }
 }
