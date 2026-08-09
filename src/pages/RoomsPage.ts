@@ -1,4 +1,5 @@
 import { Locator, Page } from '@playwright/test';
+import { environment } from '../config/environment';
 import { BasePage } from './BasePage';
 
 export class RoomsPage extends BasePage {
@@ -13,7 +14,7 @@ export class RoomsPage extends BasePage {
   }
 
   async open(): Promise<void> {
-    await this.page.goto('https://automationintesting.online/');
+    await this.page.goto(environment.roomsUiUrl);
     await this.roomCards.first().waitFor({ state: 'visible' });
   }
 

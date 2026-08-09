@@ -1,9 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
-import dotenv from 'dotenv';
-
-dotenv.config({ quiet: true });
-
-const baseURL = process.env.BASE_URL ?? 'https://www.saucedemo.com';
+import { environment } from './src/config/environment';
 
 export default defineConfig({
   testDir: './tests',
@@ -19,7 +15,7 @@ export default defineConfig({
   reporter: [['html', { open: 'never' }], ['allure-playwright']],
 
   use: {
-    baseURL,
+    baseURL: environment.baseUrl,
 
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',

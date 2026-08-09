@@ -1,4 +1,5 @@
 import { APIRequestContext, APIResponse } from '@playwright/test';
+import { environment } from '../config/environment';
 
 export type Room = {
   roomid: number;
@@ -14,12 +15,10 @@ type RoomsResponse = {
 };
 
 export class RoomApiClient {
-  private static readonly baseUrl = 'https://automationintesting.online/api';
-
   constructor(private readonly request: APIRequestContext) {}
 
   async getRooms(): Promise<APIResponse> {
-    return this.request.get(`${RoomApiClient.baseUrl}/room/`);
+    return this.request.get(`${environment.roomsApiUrl}/room/`);
   }
 
   async getRoomsData(): Promise<Room[]> {

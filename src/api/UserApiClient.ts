@@ -1,4 +1,5 @@
 import { APIRequestContext, APIResponse } from '@playwright/test';
+import { environment } from '../config/environment';
 
 export type User = {
   id: number;
@@ -8,12 +9,10 @@ export type User = {
 };
 
 export class UserApiClient {
-  private static readonly baseUrl = 'https://jsonplaceholder.typicode.com';
-
   constructor(private readonly request: APIRequestContext) {}
 
   async getUser(userId: number): Promise<APIResponse> {
-    return this.request.get(`${UserApiClient.baseUrl}/users/${userId}`);
+    return this.request.get(`${environment.usersApiUrl}/users/${userId}`);
   }
 
   async getUserData(userId: number): Promise<User> {
