@@ -1,12 +1,15 @@
 import { APIRequestContext, APIResponse } from '@playwright/test';
+import { z } from 'zod';
 import { environment } from '../config/environment';
 
-export type User = {
-  id: number;
-  name: string;
-  username: string;
-  email: string;
-};
+const userSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  username: z.string(),
+  email: z.string().email(),
+});
+
+export type User = z.infer<typeof userSchema>;
 
 export type UserResponse = {
   response: APIResponse;
@@ -25,7 +28,8 @@ export class UserApiClient {
       );
     }
 
-    const data = (await response.json()) as User;
+    const body = await response.json();
+    const data = userSchema.parse(body);
 
     return {
       response,
